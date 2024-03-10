@@ -16,7 +16,7 @@ const index = () => {
           <Text
             style={{
               fontWeight: 500,
-              fontSize: 11.5,
+              fontSize: 11.4,
               color: "#6E7480",
               marginLeft: 6,
               marginRight: 1,
@@ -24,7 +24,7 @@ const index = () => {
           >
             Surry Hills Goulburn Street..
           </Text>
-          <Entypo name="chevron-right" size={22} color="#5D3EBD" />
+          <Entypo name="chevron-right" size={21} color="#5D3EBD" />
         </View>
         <View style={styles.headerTwo}>
           <Text style={{ fontSize: 10, fontWeight: "bold", color: "#5D3EBD" }}>

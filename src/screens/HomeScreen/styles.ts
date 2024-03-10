@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     marginLeft: 9,
     paddingLeft: 8,
     borderLeftColor: "#F3F2FD",
-    borderLeftWidth: 3,
+    borderLeftWidth: 2,
   },
   headerTwo: {
     width: "25%",
