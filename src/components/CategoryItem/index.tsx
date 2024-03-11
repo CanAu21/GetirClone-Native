@@ -12,10 +12,14 @@ const { width, height } = Dimensions.get("window");
 type categoryItemProps = {
   item: Category;
 };
+import { useNavigation } from "@react-navigation/native";
 
 function index({ item }: categoryItemProps) {
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
+      onPress={() => navigation.navigate("CategoryDetails", { category: item })}
       testID="category-item"
       style={{
         width: width * 0.25,
