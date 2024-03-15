@@ -3,9 +3,18 @@ import React, { useState } from "react";
 
 const { width, height } = Dimensions.get("window");
 
-const TypeBox = ({ item, active }: { item: string; active: string }) => {
+const TypeBox = ({
+  item,
+  active,
+  setCat,
+}: {
+  item: string;
+  active: string;
+  setCat: any;
+}) => {
   return (
     <TouchableOpacity
+      onPress={() => setCat(item)}
       style={[
         {
           flexDirection: "row",
@@ -44,6 +53,8 @@ const index = () => {
         paddingVertical: height * 0.014,
         paddingHorizontal: 12,
         backgroundColor: "white",
+        borderBottomColor: "lightgray",
+        borderBottomWidth: 2,
       }}
       showsHorizontalScrollIndicator={false}
       bounces={true}
@@ -51,7 +62,7 @@ const index = () => {
     >
       {["Birlikte İyi Gider", "Çubuk", "Kutu", "Küllah", "Çoklu", "Bar"].map(
         (item) => (
-          <TypeBox item={item} active={category} />
+          <TypeBox setCat={setCategory} item={item} active={category} />
         )
       )}
     </ScrollView>
