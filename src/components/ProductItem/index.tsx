@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
 import React from "react";
 import { Entypo } from "@expo/vector-icons";
 import { Product } from "../../models";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -10,8 +11,11 @@ type productItemType = {
 };
 
 const index = ({ item }) => {
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
+      onPress={() => navigation.navigate("ProductDetails", { product: item })}
       style={{
         width: width * 0.28,
         height: height * 0.24,
