@@ -1,10 +1,21 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { View, Text, ActivityIndicator } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Product } from "../../models";
+import ImageCarousel from "../../components/ImageCarousel";
 
-const index = () => {
+const index = (props) => {
+  const [product, setProduct] = useState<Product>();
+
+  useEffect(() => {
+    setProduct(props.route.params.product);
+  }, []);
+
+  if (!product) {
+    return <ActivityIndicator color={"#5D3EBD"} />;
+  }
   return (
     <View>
-      <Text>Furkan</Text>
+      <ImageCarousel images={product?.images} />
     </View>
   );
 };
