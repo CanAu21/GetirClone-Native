@@ -2,6 +2,9 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import RootNavigator from "./src/navigators/RootNavigator";
 import "react-native-gesture-handler";
+import { LogBox } from "react-native";
+
+LogBox.ignoreAllLogs();
 
 export default function App() {
   return (
