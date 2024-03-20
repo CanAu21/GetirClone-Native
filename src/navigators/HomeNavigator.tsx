@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
 import CategoryFilterScreen from "../screens/CategoryFilterScreen";
 import ProductDetailsScreen from "../screens/ProductDetailsScreen";
+import CartScreen from "../screens/CartScreen";
 import { Ionicons } from "@expo/vector-icons";
 import {
   getFocusedRouteNameFromRoute,
@@ -56,6 +57,7 @@ const MyStack = ({ navigation, route }) => {
           ),
           headerRight: () => (
             <TouchableOpacity
+              onPress={() => navigation.navigate("CartScreen")}
               style={{
                 width: width * 0.22,
                 height: 33,
@@ -117,6 +119,33 @@ const MyStack = ({ navigation, route }) => {
           headerRight: () => (
             <TouchableOpacity style={{ paddingRight: 12 }}>
               <AntDesign name="heart" size={24} color="#32177a" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="CartScreen"
+        component={CartScreen}
+        options={{
+          headerTintColor: "white",
+          headerBackTitleVisible: false,
+          headerStyle: { backgroundColor: "#5C3EBC" },
+          headerTitle: () => (
+            <Text style={{ fontWeight: "bold", fontSize: 15, color: "white" }}>
+              Sepetim
+            </Text>
+          ),
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{ paddingLeft: 10 }}
+              onPress={() => navigation.goBack()}
+            >
+              <Ionicons name="close" size={26} color="white" />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity style={{ paddingRight: 10 }}>
+              <Ionicons name="trash" size={24} color="white" />
             </TouchableOpacity>
           ),
         }}
