@@ -1,4 +1,4 @@
-import { Image, Text, TouchableOpacity } from "react-native";
+import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
@@ -10,6 +10,8 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
+
+const { width, height } = Dimensions.get("window");
 
 const Stack = createStackNavigator();
 
@@ -51,6 +53,44 @@ const MyStack = ({ navigation, route }) => {
             <Text style={{ fontWeight: "bold", fontSize: 15, color: "white" }}>
               Ürünler
             </Text>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{
+                width: width * 0.22,
+                height: 33,
+                marginRight: width * 0.03,
+                backgroundColor: "white",
+                borderRadius: 9,
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                style={{ width: 23, height: 23, marginLeft: 6 }}
+                source={require("../../assets/cart.png")}
+              />
+              <View
+                style={{ height: 33, width: 4, backgroundColor: "white" }}
+              ></View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: 33,
+                  borderTopRightRadius: 9,
+                  borderBottomRightRadius: 9,
+                  backgroundColor: "#F3EFFE",
+                }}
+              >
+                <Text
+                  style={{ color: "#5D3EBD", fontWeight: "bold", fontSize: 12 }}
+                >
+                  <Text>{"\u20BA"}</Text>24,00
+                </Text>
+              </View>
+            </TouchableOpacity>
           ),
         }}
       />
