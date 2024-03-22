@@ -1,87 +1,107 @@
+import React, { useState, useEffect } from "react";
 import {
   View,
-  Text,
   FlatList,
+  Text,
   TouchableOpacity,
   Dimensions,
   ScrollView,
 } from "react-native";
-import React from "react";
 import productsGetir from "../../../assets/productsGetir";
+import { Product } from "../../models";
 import CartItem from "../../components/CartItem";
 import ProductItem from "../../components/ProductItem";
+import { connect } from "react-redux";
 
-const { width, height } = Dimensions.get("window");
+const { height, width } = Dimensions.get("window");
 
-const index = () => {
+function index({
+  cartItems,
+}: {
+  cartItems: { product: Product; quantity: number }[];
+}) {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
         <FlatList
-          data={productsGetir.slice(0, 3)}
+          style={{ backgroundColor: "#F5F5F5" }}
+          data={cartItems}
           renderItem={({ item }) => <CartItem product={item} />}
         />
         <Text style={{ padding: 15, fontWeight: "bold", color: "#5D3EBD" }}>
           Önerilen Ürünler
         </Text>
         <ScrollView
-          horizontal={true}
+          style={{ backgroundColor: "white" }}
           showsHorizontalScrollIndicator={false}
           bounces={true}
-          style={{ backgroundColor: "white" }}
+          horizontal={true}
         >
           {productsGetir.map((item, index) => (
-            <ProductItem key={index} item={item} />
+            <ProductItem index={item.id} item={item} />
           ))}
         </ScrollView>
       </ScrollView>
-      <View
+
+      <TouchableOpacity
         style={{
-          height: height * 0.12,
-          width: "100%",
           flexDirection: "row",
           alignItems: "center",
+          height: height * 0.12,
           paddingHorizontal: "4%",
+          width: "100%",
+          backgroundColor: "#f8f8f8",
           position: "absolute",
           bottom: 0,
-          backgroundColor: "#f8f8f8",
         }}
       >
         <TouchableOpacity
           style={{
-            height: height * 0.06,
             flex: 3,
+            borderBottomLeftRadius: 8,
+            borderTopLeftRadius: 8,
             backgroundColor: "#5D3EBD",
+            height: height * 0.06,
             justifyContent: "center",
             alignItems: "center",
             marginTop: -10,
-            borderTopLeftRadius: 8,
-            borderBottomLeftRadius: 8,
           }}
         >
-          <Text style={{ color: "white", fontWeight: "bold", fontSize: 15 }}>
+          <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
             Devam
           </Text>
         </TouchableOpacity>
         <View
           style={{
             flex: 1,
-            backgroundColor: "white",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: -10,
+            backgroundColor: "white",
             height: height * 0.06,
+            marginTop: -10,
             borderTopRightRadius: 8,
             borderBottomRightRadius: 8,
           }}
         >
-          <Text style={{ color: "#5D3EBD", fontWeight: "bold", fontSize: 16 }}>
-            <Text>{"\u20BA"}</Text>24.00
+          <Text
+            style={{
+              color: "#5D3EBD",
+              fontWeight: "bold",
+              fontSize: 15,
+            }}
+          >
+            <Text>{"\u20BA"}</Text>
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
+}
+const mapStateToProps = (state) => {
+  const { cartItems } = state;
+  return {
+    cartItems: cartItems,
+  };
 };
 
-export default index;
+export default connect(mapStateToProps, null)(index);
