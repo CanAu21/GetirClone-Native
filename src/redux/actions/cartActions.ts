@@ -13,7 +13,6 @@ export const removeFromCart = (payload) => {
     payload,
   };
 };
-
 export const clearCart = () => {
   return {
     type: CLEAR_CART,
