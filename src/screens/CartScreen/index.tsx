@@ -90,7 +90,7 @@ function index({
               fontSize: 15,
             }}
           >
-            <Text>{"\u20BA"}</Text>
+            <Text>{"\u20BA"}</Text>24.00
           </Text>
         </View>
       </TouchableOpacity>
