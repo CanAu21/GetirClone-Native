@@ -1,11 +1,20 @@
 import { View, Text, Dimensions, TouchableOpacity } from "react-native";
 import React from "react";
+import { connect } from "react-redux";
+import * as actions from "../../redux/actions/cartActions";
+import { Product } from "../../models";
 
 const { width, height } = Dimensions.get("window");
 
-const index = () => {
+type cartButtonType = {
+  addItemToCart: (a: Product) => void;
+  item: Product;
+};
+
+const index = ({ item, addItemToCart }: cartButtonType) => {
   return (
     <TouchableOpacity
+      onPress={() => addItemToCart(item)}
       style={{
         justifyContent: "center",
         position: "absolute",
@@ -33,4 +42,11 @@ const index = () => {
   );
 };
 
-export default index;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItemToCart: (product: Product) =>
+      dispatch(actions.addToCart({ quantity: 1, product })),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(index);

@@ -13,6 +13,7 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { Product } from "../models";
+import * as actions from "../redux/actions/cartActions";
 
 const { width, height } = Dimensions.get("window");
 
@@ -22,8 +23,10 @@ const MyStack = ({
   navigation,
   route,
   cartItems,
+  clearCart,
 }: {
-  cartItems: { product: Product; quantity: number };
+  cartItems: { product: Product; quantity: number }[];
+  clearCart: () => void;
 }) => {
   const tabHiddenRoutes = ["ProductDetails", "CartScreen"];
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -166,7 +169,10 @@ const MyStack = ({
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <TouchableOpacity style={{ paddingRight: 10 }}>
+            <TouchableOpacity
+              onPress={() => clearCart()}
+              style={{ paddingRight: 10 }}
+            >
               <Ionicons name="trash" size={24} color="white" />
             </TouchableOpacity>
           ),
@@ -183,10 +189,28 @@ const mapStateToProps = (state) => {
   };
 };
 
-function HomeNavigator({ navigation, route, cartItems }) {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearCart: () => dispatch(actions.clearCart()),
+  };
+};
+
+function HomeNavigator({
+  navigation,
+  route,
+  cartItems,
+  clearCart,
+}: {
+  clearCart: () => void;
+}) {
   return (
-    <MyStack navigation={navigation} route={route} cartItems={cartItems} />
+    <MyStack
+      navigation={navigation}
+      route={route}
+      cartItems={cartItems}
+      clearCart={clearCart}
+    />
   );
 }
 
-export default connect(mapStateToProps, null)(HomeNavigator);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeNavigator);
