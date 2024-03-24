@@ -24,4 +24,4 @@ TypeScript: A typed superset of JavaScript that compiles to plain JavaScript, of
 
 # Project GIF
 
-<img src="../my-app/assets/Screen Recording 2024-03-23 at 21.41.56 (online-video-cutter.com).gif"/>
+<img src='/my-app/assets/Screen Recording 2024-03-23 at 21.41.56 (online-video-cutter.com).gif'/>
