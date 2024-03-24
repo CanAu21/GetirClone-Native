@@ -20,13 +20,30 @@ function index({
 }: {
   cartItems: { product: Product; quantity: number }[];
 }) {
+  const [totalprice, setTotalPrice] = useState<number>(0);
+
+  const getProductsPrice = () => {
+    let total = 0;
+    cartItems.forEach((item) => {
+      total += item.product.fiyat;
+      setTotalPrice(total);
+    });
+    cartItems.length ? null : setTotalPrice(0);
+  };
+
+  useEffect(() => {
+    getProductsPrice();
+  }, [cartItems]);
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
         <FlatList
           style={{ backgroundColor: "#F5F5F5" }}
           data={cartItems}
-          renderItem={({ item }) => <CartItem product={item} />}
+          renderItem={({ item }) => (
+            <CartItem product={item.product} quantity={item.quantity} />
+          )}
         />
         <Text style={{ padding: 15, fontWeight: "bold", color: "#5D3EBD" }}>
           Önerilen Ürünler
@@ -91,6 +108,7 @@ function index({
             }}
           >
             <Text>{"\u20BA"}</Text>
+            {totalprice.toFixed(2)}
           </Text>
         </View>
       </TouchableOpacity>
