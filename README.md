@@ -21,7 +21,3 @@ React Redux: Official React bindings for Redux, enabling the integration of Redu
 Redux Thunk: Middleware for Redux, allowing asynchronous logic to be dispatched within Redux actions.
 Redux Logger: Middleware for Redux, providing logging for Redux actions in the development environment.
 TypeScript: A typed superset of JavaScript that compiles to plain JavaScript, offering enhanced code quality and developer productivity.
-
-# Project GIF
-
-<img src='/my-app/assets/Screen Recording 2024-03-23 at 21.41.56 (online-video-cutter.com).gif'/>
