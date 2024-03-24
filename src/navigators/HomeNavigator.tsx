@@ -46,6 +46,7 @@ const MyStack = ({
       const price = (total += cartItem.product.fiyat);
       setTotalPrice(price);
     });
+    cartItems.length ? null : setTotalPrice(0);
   };
 
   useEffect(() => {

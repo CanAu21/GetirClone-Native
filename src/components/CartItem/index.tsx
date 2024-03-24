@@ -1,14 +1,30 @@
-import { View, Text, Image, Dimensions } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
 import { Product } from "../../models";
+import { connect } from "react-redux";
+import * as actions from "../../redux/actions/cartActions";
 
 const { width, height } = Dimensions.get("window");
 
 type CartItemProps = {
   product: Product;
+  quantity: number;
+  removeFromCart: (product: Product) => void;
 };
 
-const index = ({ product }: CartItemProps) => {
+const CartItem = ({ product, quantity, removeFromCart }: CartItemProps) => {
+  const [count, setCount] = useState(quantity);
+
+  const increaseCount = () => {
+    setCount(count + 1);
+  };
+
+  const decreaseCount = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
+
   return (
     <View
       style={{
@@ -100,13 +116,20 @@ const index = ({ product }: CartItemProps) => {
             shadowColor: "gray",
           }}
         >
-          <View style={{ flex: 1, alignItems: "center" }}>
+          <TouchableOpacity
+            onPress={() => decreaseCount()}
+            style={{ flex: 1, alignItems: "center" }}
+          >
             <Text
-              style={{ fontWeight: "bold", fontSize: 16, color: "#5D3EBD" }}
+              style={{
+                fontWeight: "bold",
+                fontSize: 16,
+                color: "#5D3EBD",
+              }}
             >
               -
             </Text>
-          </View>
+          </TouchableOpacity>
 
           <View
             style={{
@@ -118,21 +141,35 @@ const index = ({ product }: CartItemProps) => {
             }}
           >
             <Text style={{ color: "white", fontSize: 12, fontWeight: "bold" }}>
-              1
+              {count}
             </Text>
           </View>
 
-          <View style={{ flex: 1, alignItems: "center" }}>
+          <TouchableOpacity
+            onPress={increaseCount}
+            style={{ flex: 1, alignItems: "center" }}
+          >
             <Text
-              style={{ fontWeight: "bold", fontSize: 14, color: "#5D3EBD" }}
+              style={{
+                fontWeight: "bold",
+                fontSize: 14,
+                color: "#5D3EBD",
+              }}
             >
               +
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
 };
 
-export default index;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeFromCart: (product: Product) =>
+      dispatch(actions.removeFromCart(product)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CartItem);
